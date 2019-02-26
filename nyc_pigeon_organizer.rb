@@ -1,14 +1,22 @@
 def nyc_pigeon_organizer(data)
 
-  data.each_with_object({}) do |(key, h), result|
-    h.each do |value, names|
-      names.each do |name|
-        result[name] = {}
-        result[name][key] = []
-        result[name][key] << value.to_s
-      end
+  pigeon_list = Hash.new
+  data.each do|attribute, value_hash|
+    value_hash.each do|key, name_array|
+    name_array.each do|name|
+    if  !pigeon_list.keys.include?(name)
+    pigeon_list[name]={}
     end
-  end
+    if !pigeon_list[name].keys.include?(attribute)
+    pigeon_list[name][attribute] = []
+    end
+    if ! pigeon_list[name][attribute].include?(key)
+    pigeon_list[name][attribute] << key
+    end 
+    end
+   end
+  end 
+ pigeon_list
 
   # write your code here!
 end
